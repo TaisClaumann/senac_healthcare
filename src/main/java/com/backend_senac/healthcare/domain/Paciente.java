@@ -1,5 +1,6 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.PacienteDto;
 import com.backend_senac.healthcare.enums.SexoEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
