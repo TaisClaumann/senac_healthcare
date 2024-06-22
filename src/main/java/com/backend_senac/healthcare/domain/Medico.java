@@ -1,5 +1,6 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.MedicoDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -48,4 +49,17 @@ public class Medico {
 
     @LastModifiedDate
     private OffsetDateTime modifiedDate;
+
+    public Medico(MedicoDto medicoDto) {
+        this.id = medicoDto.getId();
+        this.nome = medicoDto.getNome();
+        this.especializacao = medicoDto.getEspecializacao();
+        this.telefone = medicoDto.getEspecializacao();
+        this.email = medicoDto.getEmail();
+        this.agendamentos = medicoDto.getAgendamentos();
+        this.prontuarios = medicoDto.getProntuarios();
+        this.prescricoes = medicoDto.getPrescricoes();
+        this.createdDate = medicoDto.getCreatedDate();
+        this.modifiedDate = medicoDto.getModifiedDate();
+    }
 }
