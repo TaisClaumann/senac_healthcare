@@ -24,7 +24,7 @@ public class Medicamento {
     private String nome;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "medicamento", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "medicamentos", fetch = FetchType.LAZY)
     private List<Prescricao> prescricoes;
 
     @CreatedDate

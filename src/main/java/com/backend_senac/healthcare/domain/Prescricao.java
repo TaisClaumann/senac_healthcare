@@ -29,7 +29,7 @@ public class Prescricao {
     @ManyToOne
     private Medico medico;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "prescricao_medicamento", joinColumns = @JoinColumn(name = "medicamento_id"), inverseJoinColumns = @JoinColumn(name = "prescricao_id"))
     private List<Medicamento> medicamentos;
 
