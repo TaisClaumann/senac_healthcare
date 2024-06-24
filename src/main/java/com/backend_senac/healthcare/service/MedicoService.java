@@ -19,6 +19,10 @@ public class MedicoService {
         return medicoRepository.findAll();
     }
 
+    public Medico buscarPorId(Long id) {
+        return medicoRepository.findById(id).orElseThrow();
+    }
+
     public Medico salvar(MedicoDto medicoDto) {
         Medico medico = new Medico(medicoDto);
         return medicoRepository.save(medico);
@@ -30,4 +34,11 @@ public class MedicoService {
         return medicoRepository.save(new Medico(medicoDto));
     }
 
+    public void excluir(Long id) {
+        medicoRepository.deleteById(id);
+    }
+
+    public boolean existe(Long id) {
+        return medicoRepository.existsById(id);
+    }
 }

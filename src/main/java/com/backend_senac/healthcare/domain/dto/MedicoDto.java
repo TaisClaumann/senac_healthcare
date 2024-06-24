@@ -1,6 +1,7 @@
 package com.backend_senac.healthcare.domain.dto;
 
 import com.backend_senac.healthcare.domain.Agendamento;
+import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.Prescricao;
 import com.backend_senac.healthcare.domain.Prontuario;
 import lombok.Builder;
@@ -36,4 +37,17 @@ public class MedicoDto implements Serializable {
 
     private OffsetDateTime createdDate;
     private OffsetDateTime modifiedDate;
+
+    public MedicoDto(Medico medico) {
+        this.id = medico.getId();
+        this.nome = medico.getNome();
+        this.especializacao = medico.getEspecializacao();
+        this.telefone = medico.getEspecializacao();
+        this.email = medico.getEmail();
+        this.agendamentos = medico.getAgendamentos();
+        this.prontuarios = medico.getProntuarios();
+        this.prescricoes = medico.getPrescricoes();
+        this.createdDate = medico.getCreatedDate();
+        this.modifiedDate = medico.getModifiedDate();
+    }
 }
