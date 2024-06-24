@@ -26,7 +26,8 @@ public class MedicoService {
 
     public Medico atualizar(Long id, MedicoDto medicoDto) {
         Medico medico = medicoRepository.findById(id).orElseThrow();
-        if (Objects.nonNull())
+        medicoDto.setId(medico.getId());
+        return medicoRepository.save(new Medico(medicoDto));
     }
 
 }
