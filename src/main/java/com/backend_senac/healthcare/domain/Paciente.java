@@ -8,7 +8,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +23,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Paciente {
 
     @Id
@@ -38,10 +41,10 @@ public class Paciente {
 
     @CreatedDate
     @Column(updatable = false)
-    private OffsetDateTime createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
-    private OffsetDateTime modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @JsonIgnore
     @Builder.Default

@@ -5,6 +5,7 @@ import com.backend_senac.healthcare.enums.SexoEnum;
 import jakarta.persistence.Entity;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
@@ -21,8 +22,8 @@ public class PacienteDto {
     private String telefone;
     private String endereco;
     private String email;
-    private OffsetDateTime createdDate;
-    private OffsetDateTime modifiedDate;
+    private LocalDateTime createdDate;
+    private LocalDateTime modifiedDate;
 
     public PacienteDto(Paciente paciente) {
         this.id = paciente.getId();
