@@ -57,7 +57,7 @@ public class Medico {
         this.id = medicoDto.getId();
         this.nome = medicoDto.getNome();
         this.especializacao = medicoDto.getEspecializacao();
-        this.telefone = medicoDto.getEspecializacao();
+        this.telefone = medicoDto.getTelefone();
         this.email = medicoDto.getEmail();
         this.agendamentos = medicoDto.getAgendamentos().stream().map(Agendamento::new).toList();
         this.prontuarios = medicoDto.getProntuarios().stream().map(Prontuario::new).toList();

@@ -2,6 +2,7 @@ package com.backend_senac.healthcare.service;
 
 import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.dto.MedicoDto;
+import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.repository.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class MedicoService {
     }
 
     public Medico buscarPorId(Long id) {
-        return medicoRepository.findById(id).orElseThrow();
+        return medicoRepository.findById(id).orElseThrow(() -> new RegistroNaoEncontradoException("Medico", id));
     }
 
     public Medico salvar(MedicoDto medicoDto) {

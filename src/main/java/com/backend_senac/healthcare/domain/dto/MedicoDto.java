@@ -41,7 +41,7 @@ public class MedicoDto implements Serializable {
         this.id = medico.getId();
         this.nome = medico.getNome();
         this.especializacao = medico.getEspecializacao();
-        this.telefone = medico.getEspecializacao();
+        this.telefone = medico.getTelefone();
         this.email = medico.getEmail();
         this.agendamentos = medico.getAgendamentos().stream().map(AgendamentoDto::new).toList();
         this.prontuarios = medico.getProntuarios().stream().map(ProntuarioDto::new).toList();
