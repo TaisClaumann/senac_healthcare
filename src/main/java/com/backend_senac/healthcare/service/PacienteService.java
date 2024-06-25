@@ -22,7 +22,7 @@ public class PacienteService {
     public Paciente alterar(Long id, Paciente paciente) {
         buscarPorId(id);
         paciente.setId(id);
-        return paciente;
+        return salvar(paciente);
     }
 
     public Paciente buscarPorId(Long id) {
