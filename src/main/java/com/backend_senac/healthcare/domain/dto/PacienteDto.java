@@ -22,8 +22,8 @@ public class PacienteDto {
     private String telefone;
     private String endereco;
     private String email;
-    private LocalDateTime createdDate;
-    private LocalDateTime modifiedDate;
+    private OffsetDateTime createdDate;
+    private OffsetDateTime modifiedDate;
 
     public PacienteDto(Paciente paciente) {
         this.id = paciente.getId();

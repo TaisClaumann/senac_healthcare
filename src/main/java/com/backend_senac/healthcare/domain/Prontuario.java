@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 
@@ -14,13 +15,10 @@ import java.time.OffsetDateTime;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Prontuario {
+public class Prontuario extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private OffsetDateTime data;
     private String diagnostico;
     private String tratamento;
@@ -31,22 +29,13 @@ public class Prontuario {
     @ManyToOne
     private Medico medico;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    private OffsetDateTime modifiedDate;
-
     public Prontuario(ProntuarioDto prontuarioDto) {
-        this.id = prontuarioDto.getId();
+        super();
         this.data = prontuarioDto.getData();
         this.diagnostico = prontuarioDto.getDiagnostico();
         this.tratamento = prontuarioDto.getTratamento();
         this.observacoes = prontuarioDto.getTratamento();
         this.paciente = new Paciente(prontuarioDto.getPaciente());
         this.medico = new Medico(prontuarioDto.getMedico());
-        this.createdDate = prontuarioDto.getCreatedDate();
-        this.modifiedDate = prontuarioDto.getModifiedDate();
     }
 }

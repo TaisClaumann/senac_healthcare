@@ -2,6 +2,7 @@ package com.backend_senac.healthcare.controller;
 
 import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.dto.MedicoDto;
+import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,7 @@ public class MedicoController {
     @DeleteMapping("/{id}")
     public void excluir(@PathVariable("id") Long id) {
         if (!medicoService.existe(id)) {
-            throw new RuntimeException("Medico não encontrado por id");
+            throw new RegistroNaoEncontradoException("Medico", id);
         }
         medicoService.excluir(id);
     }

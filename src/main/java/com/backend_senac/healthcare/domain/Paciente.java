@@ -21,14 +21,10 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Paciente {
+public class Paciente extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
     private String dataNascimento;
 
@@ -38,13 +34,6 @@ public class Paciente {
     private String telefone;
     private String endereco;
     private String email;
-
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
 
     @JsonIgnore
     @Builder.Default
@@ -67,13 +56,11 @@ public class Paciente {
     private List<Prescricao> prescricoes = new ArrayList<>();
 
     public Paciente(PacienteDto pacienteDto) {
-        this.id = pacienteDto.getId();
+        super();
         this.nome = pacienteDto.getNome();
         this.dataNascimento = pacienteDto.getDataNascimento();
         this.email = pacienteDto.getEmail();
         this.telefone = pacienteDto.getTelefone();
         this.endereco = pacienteDto.getEndereco();
-        this.createdDate = pacienteDto.getCreatedDate();
-        this.modifiedDate = pacienteDto.getModifiedDate();
     }
 }

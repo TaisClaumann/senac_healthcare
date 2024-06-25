@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -15,13 +16,10 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Faturamento {
+public class Faturamento extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private Double valorTotal;
 
     @ManyToOne
@@ -31,12 +29,4 @@ public class Faturamento {
     @Builder.Default
     @OneToMany(mappedBy = "faturamento")
     private List<ItemFaturamento> itensFaturamento = new ArrayList<>();
-
-    @CreatedDate
-    @Column(updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    private OffsetDateTime modifiedDate;
-
 }

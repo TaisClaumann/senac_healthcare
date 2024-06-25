@@ -30,7 +30,7 @@ public class MedicoService {
     }
 
     public Medico atualizar(Long id, MedicoDto medicoDto) {
-        Medico medico = medicoRepository.findById(id).orElseThrow();
+        Medico medico = medicoRepository.findById(id).orElseThrow(() -> new RegistroNaoEncontradoException("Medico", id));
         medicoDto.setId(medico.getId());
         return medicoRepository.save(new Medico(medicoDto));
     }

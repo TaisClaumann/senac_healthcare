@@ -1,6 +1,5 @@
 package com.backend_senac.healthcare.domain;
 
-import com.backend_senac.healthcare.enums.TipoItemFaturamentoEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,16 +12,19 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
-@Entity
-public class ItemFaturamento extends Base {
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(of = "id")
+@MappedSuperclass
+public class Base {
 
-    private String descricao;
-    private Double valor;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @ManyToOne
-    private Faturamento faturamento;
+    @CreatedDate
+    @Column(updatable = false)
+    private OffsetDateTime createdDate;
 
-    @Enumerated(EnumType.STRING)
-    private TipoItemFaturamentoEnum tipo;
+    @LastModifiedDate
+    private OffsetDateTime modifiedDate;
 }

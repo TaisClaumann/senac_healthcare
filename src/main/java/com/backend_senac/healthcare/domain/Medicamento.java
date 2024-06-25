@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -15,31 +16,19 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Medicamento {
+public class Medicamento extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "medicamentos", fetch = FetchType.LAZY)
     private List<Prescricao> prescricoes;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    private OffsetDateTime modifiedDate;
-
     public Medicamento(MedicamentoDto medicamentoDto) {
-        this.id = medicamentoDto.getId();
+        super();
         this.nome = medicamentoDto.getNome();
         this.prescricoes = medicamentoDto.getPrescricoes().stream().map(Prescricao::new).toList();
-        this.createdDate = medicamentoDto.getCreatedDate();
-        this.modifiedDate = medicamentoDto.getModifiedDate();
     }
 }

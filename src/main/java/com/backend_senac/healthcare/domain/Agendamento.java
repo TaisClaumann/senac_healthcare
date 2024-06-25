@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 
@@ -15,13 +16,10 @@ import java.time.OffsetDateTime;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Agendamento {
+public class Agendamento extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private OffsetDateTime data;
 
     @Enumerated(EnumType.STRING)
@@ -32,19 +30,10 @@ public class Agendamento {
     @ManyToOne
     private Medico medico;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    private OffsetDateTime modifiedDate;
-
     public Agendamento(AgendamentoDto agendamentoDto) {
-        this.id = agendamentoDto.getId();
+        super();
         this.data = agendamentoDto.getData();
         this.status = agendamentoDto.getStatus();
         this.paciente = new Paciente(agendamentoDto.getPaciente());
-        this.createdDate = agendamentoDto.getCreatedDate();
-        this.modifiedDate = agendamentoDto.getModifiedDate();
     }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -19,13 +20,10 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Medico {
+public class Medico extends Base {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String nome;
     private String especializacao;
     private String telefone;
@@ -46,15 +44,8 @@ public class Medico {
     @OneToMany(mappedBy = "medico")
     private List<Prescricao> prescricoes = new ArrayList<>();
 
-    @CreatedDate
-    @Column(updatable = false)
-    private OffsetDateTime createdDate;
-
-    @LastModifiedDate
-    private OffsetDateTime modifiedDate;
-
     public Medico(MedicoDto medicoDto) {
-        this.id = medicoDto.getId();
+        super();
         this.nome = medicoDto.getNome();
         this.especializacao = medicoDto.getEspecializacao();
         this.telefone = medicoDto.getTelefone();
@@ -62,7 +53,5 @@ public class Medico {
         this.agendamentos = medicoDto.getAgendamentos().stream().map(Agendamento::new).toList();
         this.prontuarios = medicoDto.getProntuarios().stream().map(Prontuario::new).toList();
         this.prescricoes = medicoDto.getPrescricoes().stream().map(Prescricao::new).toList();
-        this.createdDate = medicoDto.getCreatedDate();
-        this.modifiedDate = medicoDto.getModifiedDate();
     }
 }
