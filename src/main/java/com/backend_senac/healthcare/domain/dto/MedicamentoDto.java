@@ -1,5 +1,7 @@
 package com.backend_senac.healthcare.domain.dto;
 
+import com.backend_senac.healthcare.domain.ItemFaturamento;
+import com.backend_senac.healthcare.domain.Medicamento;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,4 +29,12 @@ public class MedicamentoDto {
     private OffsetDateTime createdDate;
 
     private OffsetDateTime modifiedDate;
+
+    public MedicamentoDto(Medicamento medicamento) {
+        this.id = medicamento.getId();
+        this.nome = medicamento.getNome();
+        this.prescricoes = medicamento.getPrescricoes().stream().map(PrescricaoDto::new).toList();
+        this.createdDate = medicamento.getCreatedDate();
+        this.modifiedDate = medicamento.getModifiedDate();
+    }
 }

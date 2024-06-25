@@ -35,6 +35,9 @@ public class ItemFaturamentoDto {
 
     public ItemFaturamentoDto(ItemFaturamento itemFaturamento) {
         this.id = itemFaturamento.getId();
+        this.descricao = itemFaturamento.getDescricao();
+        this.valor = itemFaturamento.getValor();
+        this.tipo = itemFaturamento.getTipo();
         this.createdDate = itemFaturamento.getCreatedDate();
         this.modifiedDate = itemFaturamento.getModifiedDate();
     }

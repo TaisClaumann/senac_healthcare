@@ -27,13 +27,13 @@ public class MedicoDto implements Serializable {
     private String email;
 
     @Builder.Default
-    private List<Agendamento> agendamentos = new ArrayList<>();
+    private List<AgendamentoDto> agendamentos = new ArrayList<>();
 
     @Builder.Default
-    private List<Prontuario> prontuarios = new ArrayList<>();
+    private List<ProntuarioDto> prontuarios = new ArrayList<>();
 
     @Builder.Default
-    private List<Prescricao> prescricoes = new ArrayList<>();
+    private List<PrescricaoDto> prescricoes = new ArrayList<>();
 
     private OffsetDateTime createdDate;
     private OffsetDateTime modifiedDate;
@@ -44,9 +44,9 @@ public class MedicoDto implements Serializable {
         this.especializacao = medico.getEspecializacao();
         this.telefone = medico.getEspecializacao();
         this.email = medico.getEmail();
-        this.agendamentos = medico.getAgendamentos();
-        this.prontuarios = medico.getProntuarios();
-        this.prescricoes = medico.getPrescricoes();
+        this.agendamentos = medico.getAgendamentos().stream().map(AgendamentoDto::new).toList();
+        this.prontuarios = medico.getProntuarios().stream().map(ProntuarioDto::new).toList();
+        this.prescricoes = medico.getPrescricoes().stream().map(PrescricaoDto::new).toList();
         this.createdDate = medico.getCreatedDate();
         this.modifiedDate = medico.getModifiedDate();
     }

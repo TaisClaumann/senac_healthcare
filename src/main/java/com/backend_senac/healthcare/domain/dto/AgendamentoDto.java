@@ -26,9 +26,9 @@ public class AgendamentoDto {
     @Enumerated(EnumType.STRING)
     private StatusAgendamento status;
 
-    private Paciente paciente;
+    private PacienteDto paciente;
 
-    private Medico medico;
+    private MedicoDto medico;
 
     private OffsetDateTime createdDate;
 
@@ -38,8 +38,8 @@ public class AgendamentoDto {
         this.id = medico.getId();
         this.data = agendamento.getData();
         this.status = agendamento.getStatus();
-        this.paciente = agendamento.getPaciente();
-        this.medico = agendamento.getMedico();
+        this.paciente = new PacienteDto(agendamento.getPaciente());
+        this.medico = new MedicoDto(agendamento.getMedico());
         this.createdDate = agendamento.getCreatedDate();
         this.modifiedDate = agendamento.getModifiedDate();
     }
