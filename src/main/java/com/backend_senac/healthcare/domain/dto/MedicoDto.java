@@ -4,10 +4,7 @@ import com.backend_senac.healthcare.domain.Agendamento;
 import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.Prescricao;
 import com.backend_senac.healthcare.domain.Prontuario;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
@@ -17,6 +14,8 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class MedicoDto implements Serializable {
 

@@ -1,5 +1,7 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.AgendamentoDto;
+import com.backend_senac.healthcare.domain.dto.MedicoDto;
 import com.backend_senac.healthcare.enums.StatusAgendamento;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,4 +38,13 @@ public class Agendamento {
 
     @LastModifiedDate
     private OffsetDateTime modifiedDate;
+
+    public Agendamento(AgendamentoDto agendamentoDto) {
+        this.id = agendamentoDto.getId();
+        this.data = agendamentoDto.getData();
+        this.status = agendamentoDto.getStatus();
+        this.paciente = new Paciente(agendamentoDto.getPaciente());
+        this.createdDate = agendamentoDto.getCreatedDate();
+        this.modifiedDate = agendamentoDto.getModifiedDate();
+    }
 }

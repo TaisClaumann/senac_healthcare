@@ -1,5 +1,7 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.MedicamentoDto;
+import com.backend_senac.healthcare.domain.dto.PrescricaoDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,4 +41,16 @@ public class Prescricao {
 
     @LastModifiedDate
     private OffsetDateTime modifiedDate;
+
+    public Prescricao(PrescricaoDto prescricaoDto) {
+        this.id = prescricaoDto.getId();
+        this.data = prescricaoDto.getData();
+        this.dosagem = prescricaoDto.getDosagem();
+        this.duracao = prescricaoDto.getDuracao();
+        this.paciente = new Paciente(prescricaoDto.getPaciente());
+        this.medico = new Medico(prescricaoDto.getMedico());
+        this.medicamentos = prescricaoDto.getMedicamentosDto().stream().map(Medicamento::new).toList();
+        this.createdDate = prescricaoDto.getCreatedDate();
+        this.modifiedDate = prescricaoDto.getModifiedDate();
+    }
 }

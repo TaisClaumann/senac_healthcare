@@ -1,4 +1,4 @@
-package com.backend_senac.healthcare.controller.exception;
+package com.backend_senac.healthcare;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

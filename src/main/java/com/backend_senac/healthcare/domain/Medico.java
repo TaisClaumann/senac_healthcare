@@ -1,6 +1,9 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.AgendamentoDto;
 import com.backend_senac.healthcare.domain.dto.MedicoDto;
+import com.backend_senac.healthcare.domain.dto.PrescricaoDto;
+import com.backend_senac.healthcare.domain.dto.ProntuarioDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -56,9 +59,9 @@ public class Medico {
         this.especializacao = medicoDto.getEspecializacao();
         this.telefone = medicoDto.getEspecializacao();
         this.email = medicoDto.getEmail();
-        this.agendamentos = medicoDto.getAgendamentos();
-        this.prontuarios = medicoDto.getProntuarios();
-        this.prescricoes = medicoDto.getPrescricoes();
+        this.agendamentos = medicoDto.getAgendamentos().stream().map(Agendamento::new).toList();
+        this.prontuarios = medicoDto.getProntuarios().stream().map(Prontuario::new).toList();
+        this.prescricoes = medicoDto.getPrescricoes().stream().map(Prescricao::new).toList();
         this.createdDate = medicoDto.getCreatedDate();
         this.modifiedDate = medicoDto.getModifiedDate();
     }

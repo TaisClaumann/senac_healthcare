@@ -1,5 +1,6 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.AgendamentoDto;
 import com.backend_senac.healthcare.domain.dto.PacienteDto;
 import com.backend_senac.healthcare.enums.SexoEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -61,4 +62,15 @@ public class Paciente {
     @Builder.Default
     @OneToMany(mappedBy = "paciente")
     private List<Prescricao> prescricoes = new ArrayList<>();
+
+    public Paciente(PacienteDto pacienteDto) {
+        this.id = pacienteDto.getId();
+        this.nome = pacienteDto.getNome();
+        this.dataNascimento = pacienteDto.getDataNascimento();
+        this.email = pacienteDto.getEmail();
+        this.telefone = pacienteDto.getTelefone();
+        this.endereco = pacienteDto.getEndereco();
+        this.createdDate = pacienteDto.getCreatedDate();
+        this.modifiedDate = pacienteDto.getModifiedDate();
+    }
 }

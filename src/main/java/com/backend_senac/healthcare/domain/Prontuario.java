@@ -1,5 +1,6 @@
 package com.backend_senac.healthcare.domain;
 
+import com.backend_senac.healthcare.domain.dto.ProntuarioDto;
 import com.backend_senac.healthcare.enums.StatusAgendamento;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,4 +37,16 @@ public class Prontuario {
 
     @LastModifiedDate
     private OffsetDateTime modifiedDate;
+
+    public Prontuario(ProntuarioDto prontuarioDto) {
+        this.id = prontuarioDto.getId();
+        this.data = prontuarioDto.getData();
+        this.diagnostico = prontuarioDto.getDiagnostico();
+        this.tratamento = prontuarioDto.getTratamento();
+        this.observacoes = prontuarioDto.getTratamento();
+        this.paciente = new Paciente(prontuarioDto.getPaciente());
+        this.medico = new Medico(prontuarioDto.getMedico());
+        this.createdDate = prontuarioDto.getCreatedDate();
+        this.modifiedDate = prontuarioDto.getModifiedDate();
+    }
 }

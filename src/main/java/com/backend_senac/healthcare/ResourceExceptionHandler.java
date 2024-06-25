@@ -1,7 +1,7 @@
-package com.backend_senac.healthcare.controller.exception;
+package com.backend_senac.healthcare;
 
-import com.backend_senac.healthcare.service.exception.RegistroJaCadastradoException;
-import com.backend_senac.healthcare.service.exception.RegistroNaoEncontradoException;
+import com.backend_senac.healthcare.exceptions.RegistroJaCadastradoException;
+import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
