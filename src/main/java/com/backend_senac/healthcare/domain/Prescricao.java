@@ -1,15 +1,11 @@
 package com.backend_senac.healthcare.domain;
 
-import com.backend_senac.healthcare.domain.dto.MedicamentoDto;
 import com.backend_senac.healthcare.domain.dto.PrescricaoDto;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +16,6 @@ import java.util.List;
 @Entity
 public class Prescricao extends Base {
 
-    private OffsetDateTime data;
     private String dosagem;
     private String duracao;
 
@@ -35,11 +30,11 @@ public class Prescricao extends Base {
 
     public Prescricao(PrescricaoDto prescricaoDto) {
         super();
-        this.data = prescricaoDto.getData();
         this.dosagem = prescricaoDto.getDosagem();
         this.duracao = prescricaoDto.getDuracao();
         this.paciente = new Paciente(prescricaoDto.getPaciente());
         this.medico = new Medico(prescricaoDto.getMedico());
-        this.medicamentos = prescricaoDto.getMedicamentosDto().stream().map(Medicamento::new).toList();
+        this.medicamentos = Objects.isNull(prescricaoDto.getMedicamentosDto()) ? null
+                : prescricaoDto.getMedicamentosDto().stream().map(Medicamento::new).toList();
     }
 }

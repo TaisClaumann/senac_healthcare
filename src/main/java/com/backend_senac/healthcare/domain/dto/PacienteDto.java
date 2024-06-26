@@ -2,10 +2,9 @@ package com.backend_senac.healthcare.domain.dto;
 
 import com.backend_senac.healthcare.domain.Paciente;
 import com.backend_senac.healthcare.enums.SexoEnum;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
@@ -22,7 +21,10 @@ public class PacienteDto {
     private String telefone;
     private String endereco;
     private String email;
+
+    @JsonIgnore
     private OffsetDateTime createdDate;
+    @JsonIgnore
     private OffsetDateTime modifiedDate;
 
     public PacienteDto(Paciente paciente) {

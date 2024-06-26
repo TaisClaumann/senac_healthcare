@@ -1,9 +1,6 @@
 package com.backend_senac.healthcare.domain.dto;
 
-import com.backend_senac.healthcare.domain.Agendamento;
 import com.backend_senac.healthcare.domain.Medico;
-import com.backend_senac.healthcare.domain.Prescricao;
-import com.backend_senac.healthcare.domain.Prontuario;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -38,7 +35,9 @@ public class MedicoDto implements Serializable {
     @JsonIgnore
     private List<PrescricaoDto> prescricoes = new ArrayList<>();
 
+    @JsonIgnore
     private OffsetDateTime createdDate;
+    @JsonIgnore
     private OffsetDateTime modifiedDate;
 
     public MedicoDto(Medico medico) {
