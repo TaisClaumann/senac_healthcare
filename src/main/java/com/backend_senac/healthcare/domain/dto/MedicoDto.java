@@ -4,6 +4,7 @@ import com.backend_senac.healthcare.domain.Agendamento;
 import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.Prescricao;
 import com.backend_senac.healthcare.domain.Prontuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.io.Serializable;
@@ -26,12 +27,15 @@ public class MedicoDto implements Serializable {
     private String email;
 
     @Builder.Default
+    @JsonIgnore
     private List<AgendamentoDto> agendamentos = new ArrayList<>();
 
     @Builder.Default
+    @JsonIgnore
     private List<ProntuarioDto> prontuarios = new ArrayList<>();
 
     @Builder.Default
+    @JsonIgnore
     private List<PrescricaoDto> prescricoes = new ArrayList<>();
 
     private OffsetDateTime createdDate;
@@ -43,9 +47,6 @@ public class MedicoDto implements Serializable {
         this.especializacao = medico.getEspecializacao();
         this.telefone = medico.getTelefone();
         this.email = medico.getEmail();
-        this.agendamentos = medico.getAgendamentos().stream().map(AgendamentoDto::new).toList();
-        this.prontuarios = medico.getProntuarios().stream().map(ProntuarioDto::new).toList();
-        this.prescricoes = medico.getPrescricoes().stream().map(PrescricaoDto::new).toList();
         this.createdDate = medico.getCreatedDate();
         this.modifiedDate = medico.getModifiedDate();
     }
