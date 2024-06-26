@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,20 +21,18 @@ import java.util.List;
 public class MedicamentoDto {
 
     private Long id;
-
     private String nome;
 
     @JsonIgnore
     private List<PrescricaoDto> prescricoes;
 
     private OffsetDateTime createdDate;
-
     private OffsetDateTime modifiedDate;
 
     public MedicamentoDto(Medicamento medicamento) {
         this.id = medicamento.getId();
         this.nome = medicamento.getNome();
-        this.prescricoes = medicamento.getPrescricoes().stream().map(PrescricaoDto::new).toList();
+        this.prescricoes = Objects.isNull(medicamento.getPrescricoes()) ? null : medicamento.getPrescricoes().stream().map(PrescricaoDto::new).toList();
         this.createdDate = medicamento.getCreatedDate();
         this.modifiedDate = medicamento.getModifiedDate();
     }

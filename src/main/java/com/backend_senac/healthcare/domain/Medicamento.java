@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +30,6 @@ public class Medicamento extends Base {
     public Medicamento(MedicamentoDto medicamentoDto) {
         super();
         this.nome = medicamentoDto.getNome();
-        this.prescricoes = medicamentoDto.getPrescricoes().stream().map(Prescricao::new).toList();
+        this.prescricoes = Objects.isNull(medicamentoDto.getPrescricoes()) ? null : medicamentoDto.getPrescricoes().stream().map(Prescricao::new).toList();
     }
 }
