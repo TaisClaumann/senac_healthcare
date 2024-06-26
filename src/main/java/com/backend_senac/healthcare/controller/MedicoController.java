@@ -1,6 +1,5 @@
 package com.backend_senac.healthcare.controller;
 
-import com.backend_senac.healthcare.domain.Medico;
 import com.backend_senac.healthcare.domain.dto.MedicoDto;
 import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.service.MedicoService;
@@ -17,8 +16,8 @@ public class MedicoController {
     private MedicoService medicoService;
 
     @GetMapping
-    public List<MedicoDto> listar() {
-        return medicoService.listar().stream()
+    public List<MedicoDto> listarTodos() {
+        return medicoService.listarTodos().stream()
                 .map(MedicoDto::new)
                 .toList();
     }

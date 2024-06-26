@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class MedicoService {
@@ -16,7 +15,7 @@ public class MedicoService {
     @Autowired
     private MedicoRepository medicoRepository;
 
-    public List<Medico> listar() {
+    public List<Medico> listarTodos() {
         return medicoRepository.findAll();
     }
 

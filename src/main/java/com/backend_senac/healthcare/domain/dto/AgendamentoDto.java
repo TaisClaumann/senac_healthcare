@@ -9,6 +9,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
@@ -20,22 +21,18 @@ import java.time.OffsetDateTime;
 public class AgendamentoDto {
 
     private Long id;
-
     private OffsetDateTime data;
 
     @Enumerated(EnumType.STRING)
     private StatusAgendamento status;
 
     private PacienteDto paciente;
-
     private MedicoDto medico;
-
     private OffsetDateTime createdDate;
-
     private OffsetDateTime modifiedDate;
 
     public AgendamentoDto(Agendamento agendamento) {
-        this.id = medico.getId();
+        this.id = agendamento.getId();
         this.data = agendamento.getData();
         this.status = agendamento.getStatus();
         this.paciente = new PacienteDto(agendamento.getPaciente());

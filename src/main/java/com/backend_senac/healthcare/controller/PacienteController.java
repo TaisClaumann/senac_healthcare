@@ -32,7 +32,7 @@ public class PacienteController {
 
     @GetMapping
     public List<PacienteDto> listarTodos() {
-        return pacienteService.buscarTodos().stream().map(PacienteDto::new).toList();
+        return pacienteService.listarTodos().stream().map(PacienteDto::new).toList();
     }
 
     @DeleteMapping("/{id}")

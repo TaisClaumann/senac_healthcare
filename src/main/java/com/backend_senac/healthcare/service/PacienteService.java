@@ -1,7 +1,6 @@
 package com.backend_senac.healthcare.service;
 
 import com.backend_senac.healthcare.domain.Paciente;
-import com.backend_senac.healthcare.domain.dto.PacienteDto;
 import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class PacienteService {
         pacienteRepository.deleteById(id);
     }
 
-    public List<Paciente> buscarTodos() {
+    public List<Paciente> listarTodos() {
         return pacienteRepository.findAll();
     }
 }
