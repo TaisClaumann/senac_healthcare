@@ -39,4 +39,9 @@ public class FaturamentoController {
     public void excluir(@PathVariable("id") Long id) {
         faturamentoService.excluir(id);
     }
+
+    @GetMapping("/{pacienteId}/paciente")
+    public FaturamentoDto buscarPorPaciente(@PathVariable("pacienteId") Long pacienteId) {
+        return new FaturamentoDto(faturamentoService.buscarPorPaciente(pacienteId));
+    }
 }

@@ -1,6 +1,7 @@
 package com.backend_senac.healthcare.service;
 
 import com.backend_senac.healthcare.domain.Faturamento;
+import com.backend_senac.healthcare.domain.Paciente;
 import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.repository.FaturamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,11 @@ public class FaturamentoService {
 
     public List<Faturamento> listarTodos() {
         return faturamentoRepository.findAll();
+    }
+
+    public Faturamento buscarPorPaciente(Long pacienteId) {
+        Paciente paciente = pacienteService.buscarPorId(pacienteId);
+        return faturamentoRepository.findByPaciente(paciente).orElseThrow(() ->
+                new RegistroNaoEncontradoException("Não existe faturamento para o paciente " + paciente.getNome()));
     }
 }
