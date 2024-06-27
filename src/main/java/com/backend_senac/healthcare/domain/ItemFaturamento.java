@@ -1,13 +1,11 @@
 package com.backend_senac.healthcare.domain;
 
 import com.backend_senac.healthcare.enums.TipoItemFaturamentoEnum;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.OffsetDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
