@@ -32,7 +32,7 @@ public class ItemFaturamentoService {
 
     public ItemFaturamento buscarPorId(Long id) {
         return itemFaturamentoRepository.findById(id).orElseThrow(() ->
-                new RegistroNaoEncontradoException("Item Faturamento com id " + id + " não encontrado"));
+                new RegistroNaoEncontradoException("Item Faturamento", id));
     }
 
     public void excluir(Long id) {

@@ -20,7 +20,7 @@ public class MedicamentoService {
 
     public Medicamento buscarPorId(Long id) {
         return medicamentoRepository.findById(id).orElseThrow(() ->
-                new RegistroNaoEncontradoException("Medicamento com id " + id + " não encontrado"));
+                new RegistroNaoEncontradoException("Medicamento", id));
     }
 
     public Medicamento alterar(Long id, Medicamento medicamento) {

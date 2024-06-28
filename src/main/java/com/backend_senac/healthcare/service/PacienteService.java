@@ -26,7 +26,7 @@ public class PacienteService {
 
     public Paciente buscarPorId(Long id) {
         return pacienteRepository.findById(id).orElseThrow(() ->
-                new RegistroNaoEncontradoException("Paciente com id " + id + " não encontrado"));
+                new RegistroNaoEncontradoException("Paciente", id));
     }
 
     public void excluir(Long id) {

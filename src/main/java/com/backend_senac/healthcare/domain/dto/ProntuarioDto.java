@@ -2,9 +2,11 @@ package com.backend_senac.healthcare.domain.dto;
 
 import com.backend_senac.healthcare.domain.Prontuario;
 import com.backend_senac.healthcare.utils.DataUtils;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +17,6 @@ import java.time.OffsetDateTime;
 public class ProntuarioDto {
 
     private Long id;
-    private OffsetDateTime data;
     private String diagnostico;
     private String tratamento;
     private String observacoes;
@@ -27,18 +28,22 @@ public class ProntuarioDto {
     private String dataEntrada;
     private String dataAlta;
 
+    @JsonIgnore
     private OffsetDateTime createdDate;
+    @JsonIgnore
     private OffsetDateTime modifiedDate;
 
     public ProntuarioDto(Prontuario prontuario) {
         this.id = prontuario.getId();
         this.tratamento = prontuario.getTratamento();
         this.observacoes = prontuario.getObservacoes();
-        this.paciente = new PacienteDto(prontuario.getPaciente());
-        this.medico = new MedicoDto(prontuario.getMedico());
+        this.paciente = Objects.nonNull(prontuario.getPaciente()) ? new PacienteDto(prontuario.getPaciente()) : null;
+        this.medico = Objects.nonNull(prontuario.getMedico()) ? new MedicoDto(prontuario.getMedico()) : null;
         this.createdDate = prontuario.getCreatedDate();
         this.modifiedDate = prontuario.getModifiedDate();
         this.dataEntrada = DataUtils.offsetDateTimeToString(prontuario.getDataEntrada());
         this.dataAlta = DataUtils.offsetDateTimeToString(prontuario.getDataAlta());
+        this.convenio = prontuario.getConvenio();
+        this.diagnostico = prontuario.getDiagnostico();
     }
 }

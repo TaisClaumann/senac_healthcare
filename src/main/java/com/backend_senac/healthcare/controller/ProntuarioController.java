@@ -39,4 +39,20 @@ public class ProntuarioController {
     public void excluir(@PathVariable("id") Long id) {
         prontuarioService.excluir(id);
     }
+
+    @GetMapping("{pacienteId}/paciente")
+    public List<ProntuarioDto> listarPorPaciente(@PathVariable("pacienteId") Long pacienteId) {
+        return prontuarioService.listarPorPaciente(pacienteId);
+    }
+
+    @GetMapping("{medicoId}/medico")
+    public List<ProntuarioDto> listarPorMedico(@PathVariable("medicoId") Long medicoId) {
+        return prontuarioService.listarPorPaciente(medicoId);
+    }
+
+    @GetMapping("/paciente/{pacienteId}/medico/{medicoId}")
+    public List<ProntuarioDto> listarPorMedicoEPaciente(@PathVariable("pacienteId") Long pacienteId,
+                                                        @PathVariable("medicoId") Long medicoId) {
+        return prontuarioService.listarPorPacienteEMedico(pacienteId, medicoId);
+    }
 }

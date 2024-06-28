@@ -24,7 +24,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @Entity
-public class Paciente extends Base {
+public class Paciente extends Base implements Serializable {
 
     private String nome;
     private String dataNascimento;

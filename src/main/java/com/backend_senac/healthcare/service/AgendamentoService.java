@@ -2,10 +2,12 @@ package com.backend_senac.healthcare.service;
 
 import com.backend_senac.healthcare.domain.Agendamento;
 import com.backend_senac.healthcare.domain.Medico;
+import com.backend_senac.healthcare.exceptions.AgendamentoJaCadastradoNoMesmoHorario;
 import com.backend_senac.healthcare.exceptions.RegistroJaCadastradoException;
 import com.backend_senac.healthcare.exceptions.RegistroNaoEncontradoException;
 import com.backend_senac.healthcare.repository.AgendamentoRepository;
 import com.backend_senac.healthcare.utils.DataUtils;
+import com.backend_senac.healthcare.utils.MessageBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class AgendamentoService {
     private PacienteService pacienteService;
     @Autowired
     private MedicoService medicoService;
+    private final String AGENDAMENTO = "Agendamento";
 
     public Agendamento salvar(Agendamento agendamento) {
         pacienteService.buscarPorId(agendamento.getPaciente().getId());
@@ -32,7 +35,7 @@ public class AgendamentoService {
             agendamento.setData(data);
             return agendamentoRepository.save(agendamento);
         }
-        throw new RegistroJaCadastradoException("Agendamento para " + DataUtils.offsetDateTimeToString(agendamento.getData()) + " não disponível");
+        throw new AgendamentoJaCadastradoNoMesmoHorario(DataUtils.offsetDateTimeToString(agendamento.getData()));
     }
 
     private boolean hasDataEHoraDisponivel(OffsetDateTime data) {
@@ -47,8 +50,8 @@ public class AgendamentoService {
     }
 
     public Agendamento buscarPorId(Long id) {
-        return agendamentoRepository.findById(id).orElseThrow(() ->
-                new RegistroNaoEncontradoException("Agendamento com id " + id + " não encontrado"));
+        return agendamentoRepository.findById(id)
+                .orElseThrow(() -> new RegistroNaoEncontradoException(AGENDAMENTO, id));
     }
 
     public void excluir(Long id) {

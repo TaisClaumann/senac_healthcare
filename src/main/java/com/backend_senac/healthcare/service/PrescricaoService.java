@@ -36,7 +36,7 @@ public class PrescricaoService {
 
     public Prescricao buscarPorId(Long id) {
         return prescricaoRepository.findById(id).orElseThrow(() ->
-                new RegistroNaoEncontradoException("Prescricao com id " + id + " não encontrado"));
+                new RegistroNaoEncontradoException("Prescricao", id));
     }
 
     public void excluir(Long id) {
